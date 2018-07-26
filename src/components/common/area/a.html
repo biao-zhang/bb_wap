@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="javascript:void(0)" onclick="aa()">保存</a>
+</body>
+<script>
+  function fake_click(obj) {
+    var ev = document.createEvent("MouseEvents");
+    ev.initMouseEvent(
+      "click", true, false, window, 0, 0, 0, 0, 0
+      , false, false, false, false, 0, null
+    );
+    obj.dispatchEvent(ev);
+  }
+
+  //name-文件名；data-要保存的字符串。
+  function export_raw(name, data) {
+    var urlObject = window.URL || window.webkitURL || window;
+    var export_blob = new Blob([data]);
+    var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
+    save_link.href = urlObject.createObjectURL(export_blob);
+    save_link.download = name;
+    fake_click(save_link);
+  }
+  //点击按钮
+  var xmlHttp;
+  function GetXmlHttpObject(){
+    if (window.XMLHttpRequest){
+      // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    }else{// code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    return xmlhttp;
+  }
+  // -----------ajax方法-----------//
+  function getLabelsGet(){
+    xmlHttp=GetXmlHttpObject();
+    if (xmlHttp==null){
+      alert('您的浏览器不支持AJAX！');
+      return;
+    }
+    xmlHttp.open("GET",'./area.js',true);
+    xmlHttp.onreadystatechange=getOkGet;//发送事件后，收到信息了调用函数
+    xmlHttp.send();
+  }
+  getLabelsGet()
+  function getOkGet(){
+    if(xmlHttp.readyState==1||xmlHttp.readyState==2||xmlHttp.readyState==3){
+      // 本地提示：加载中
+      console.log("bb")
+    }
+    if (xmlHttp.readyState==4 && xmlHttp.status==200){
+      var data=new Array();
+      datas1= xmlHttp.responseText;
+      datas=JSON.parse(datas1);
+      for(var i=0;i<datas.length;i++){
+//        data.push('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        if(datas[i].regionPrade===1){
+          console.log(datas[i].regionPrade)
+          var w = new Object({'name':datas[i].localName,'value':datas[i].adcode});
+          data.push(JSON.stringify(w));
+        }
+        if(datas[i].regionPrade===2){
+          var s1 = parseInt(datas[i].adcode/10000);
+          var s = new Object({'name':datas[i].localName,'value':datas[i].adcode,'parent':(s1+'0000').toString()});
+          data.push(JSON.stringify(s));
+        }
+        if(datas[i].regionPrade===3){
+          var r1 = parseInt(datas[i].adcode/100);
+          var r = new Object({'name':datas[i].localName,'value':datas[i].adcode,'parent':(r1+'00').toString()});
+          data.push(JSON.stringify(r));
+        }
+      }
+      var dataParent='var cityDatas_name_value_parent_json = ['+data+']';
+      export_raw('cityData.js', dataParent);
+      // 处理返回结果
+    }
+  }
+
+  function aa() {
+
+  }
+</script>
+</html>

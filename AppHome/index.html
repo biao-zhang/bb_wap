@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0, user-scalable=no" />
+  <link href="style/reset.css" rel="stylesheet" type="text/css">
+  <link href="style/swiper-4.1.6.min.css" rel="stylesheet" type="text/css">
+  <link href="style/index.css" rel="stylesheet" type="text/css">
+  <script src="js/conform.js" type="text/javascript"></script>
+  <script src="js/fastclick.js" type="text/javascript"></script>
+  <script src="js/jquery.min.js" type="text/javascript"></script>
+  <script src="js/swiper-4.1.6.min.js" type="text/javascript"></script>
+  <script src="js/index.js"></script>
+  <script src="js/getUrl.js"></script>
+  <style>
+    *{
+      moz-user-select: -moz-none;
+      -moz-user-select: none;
+      -o-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  </style>
+  <script type="text/javascript">
+    window.addEventListener('load', function () {
+      FastClick.attach(document.body);
+    }, false);
+  </script>
+</head>
+<body>
+<!--swiperBox-->
+<div class="swiperBox">
+  <div class="swiper-container">
+    <div class="swiper-wrapper" id="lunbo"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+</div>
+<!--navBox-->
+<div class="navBox">
+  <!--<div class="indexNavItem" onclick="goodsType('女装','0')">-->
+    <!--<div class="indexNavImgBox"><img src="img/ladies.png" class="img"> </div>-->
+    <!--<div class="titBox" contenteditable="false">牛腩牛腩</div>-->
+  <!--</div>-->
+  <!--<div class="indexNavItem" onclick="goodsType('女装','1')">-->
+    <!--<div class="indexNavImgBox"><img src="img/ladies.png" class="img"> </div>-->
+    <!--<div class="titBox" contenteditable="false">牛腩牛腩</div>-->
+  <!--</div>-->
+  <!--<div class="indexNavItem" onclick="goodsType('女装','2')">-->
+    <!--<div class="indexNavImgBox"><img src="img/ladies.png" class="img"> </div>-->
+    <!--<div class="titBox" contenteditable="false">牛腩牛腩</div>-->
+  <!--</div>-->
+  <!--<div class="indexNavItem" onclick="goodsType('女装','3')">-->
+    <!--<div class="indexNavImgBox"><img src="img/ladies.png" class="img"> </div>-->
+    <!--<div class="titBox" contenteditable="false">牛腩牛腩</div>-->
+  <!--</div>-->
+  <!--<div class="indexNavItem" onclick="goodsType('女装','4')">-->
+    <!--<div class="indexNavImgBox"><img src="img/ladies.png" class="img"> </div>-->
+    <!--<div class="titBox" contenteditable="false">牛腩牛腩</div>-->
+  <!--</div>-->
+  <!--<div class="indexNavItem" onclick="goodsType('女装','5')">-->
+    <!--<div class="indexNavImgBox"><img src="img/ladies.png" class="img"> </div>-->
+    <!--<div class="titBox" contenteditable="false">牛腩牛腩</div>-->
+  <!--</div>-->
+  <!--<div class="indexNavItem" onclick="goodsType('女装','6')">-->
+    <!--<div class="indexNavImgBox"><img src="img/ladies.png" class="img"> </div>-->
+    <!--<div class="titBox" contenteditable="false">牛腩牛腩</div>-->
+  <!--</div>-->
+
+  <!--<div class="indexNavItem" onclick="goodsType('更多','-1')">-->
+    <!--<div class="indexNavImgBox"><img src="img/more.png" class="img"> </div>-->
+    <!--<div class="titBox" contenteditable="false">更多</div>-->
+  <!--</div>-->
+</div>
+<!--marqueeBox-->
+<!--<div class="marqueeBox" style="font-size: 0;">-->
+  <!--<img class="marqueeImg" src="./img/notice.png"/>-->
+  <!--<div class="marquee-container">-->
+    <!--<div class="swiper-wrapper" id="advertising"></div>-->
+  <!--</div>-->
+<!--</div>-->
+<!--广告-->
+<div class="imgAdvBox" onclick="redEnvelope()">
+  <!--<img class="imgAdv" src="img/2018.png"/>-->
+</div>
+<!--促销活动-->
+<div class="activity">
+  <div class="floorTit">
+    <img class="img1" src="img/floorTitLeft.png"><span contenteditable="false">促销活动</span><img class="img2" src="img/floorTitRight.png">
+  </div>
+  <div class="indexActivityBox">
+      <div class="item" onclick="miaoSha()">
+        <div class="line1">秒杀</div>
+        <div class="line2">
+          <span class="time ms_1">
+            <span class="blackBox" id="s1">00</span>:
+            <span class="blackBox" id="s2">00</span>:
+            <span class="blackBox" id="s3">00</span>
+          </span>
+        </div>
+        <div class="line3 seckillImg">
+          <!--<img class="img1" src="img/good1.png"/>-->
+        </div>
+      </div>
+      <div class="item" onclick="shengXian()">
+          <div class="line1" >生鲜</div>
+          <div class="line2">
+            <span class="time sx_2">
+              <span class="blackBox" id="s4">00</span>:
+              <span class="blackBox" id="s5">00</span>:
+              <span class="blackBox" id="s6">00</span>
+            </span>
+          </div>
+          <div class="line3 freshImg">
+            <!--<img class="img1" src="img/good1.png">-->
+          </div>
+      </div>
+      <div class="item" onclick="newProduct()">
+          <div class="line1">新品</div>
+          <div class="line2">
+            <span>海量积分</span>
+          </div>
+          <div class="line3 newproductImg">
+            <!--<img class="img1" src="img/good1.png">-->
+          </div>
+      </div>
+  </div>
+</div>
+<!--优质商品-->
+<div class="quality">
+  <div class="floorTit">
+    <img class="img1" src="img/floorTitLeft.png"><span>优质商品</span><img class="img2" src="img/floorTitRight.png">
+  </div>
+  <div class="indexQualityBox">
+    <div class="line1" id="line1">
+      <!--<img class="item1" onclick="prefComm('地方特色','0')" src="img/good1.png"/>-->
+      <!--<img class="item1" onclick="prefComm('地方特色','1')" src="img/good1.png"/>-->
+    </div>
+    <div class="line2" id="line2">
+      <!--<img class="item2" onclick="prefComm('地方特色','2')" src="img/good1.png"/>-->
+      <!--<img class="item2" onclick="prefComm('地方特色','3')" src="img/good1.png"/>-->
+      <!--<img class="item2" onclick="prefComm('地方特色','4')" src="img/good1.png"/>-->
+    </div>
+  </div>
+</div>
+<!--为您推荐-->
+<div class="groom">
+  <div class="floorTit">
+    <img class="img1" src="img/floorTitLeft.png"><span>为您推荐</span><img class="img2" src="img/floorTitRight.png">
+  </div>
+  <div class="groomBox">
+    <div class="groomBox groomBoxList">
+      <!--<div class="indexGroomItem" onclick="goods('0')">-->
+        <!--<div class="box"><img class="img1" src="./img/name.png"/> </div>-->
+        <!--<div class="tit">阿三家分店</div>-->
+        <!--<div class="price">￥99.00</div>-->
+      <!--</div>-->
+      <!--<div class="indexGroomItem" onclick="goods('1')">-->
+        <!--<div class="box"><img class="img1" src="./img/name.png"/> </div>-->
+        <!--<div class="tit">阿三家分店</div>-->
+        <!--<div class="price">￥99.00</div>-->
+      <!--</div>-->
+      <!--<div class="indexGroomItem" onclick="goods('2')">-->
+        <!--<div class="box"><img class="img1" src="./img/name.png"/> </div>-->
+        <!--<div class="tit">阿三家分店</div>-->
+        <!--<div class="price">￥99.00</div>-->
+      <!--</div>-->
+      <!--<div class="indexGroomItem" onclick="goods('3')">-->
+        <!--<div class="box"><img class="img1" src="./img/name.png"/> </div>-->
+        <!--<div class="tit">阿三家分店</div>-->
+        <!--<div class="price">￥99.00</div>-->
+      <!--</div>-->
+      <!--<div class="indexGroomItem" onclick="goods('4')">-->
+        <!--<div class="box"><img class="img1" src="./img/name.png"/> </div>-->
+        <!--<div class="tit">阿三家分店</div>-->
+        <!--<div class="price">￥99.00</div>-->
+      <!--</div>-->
+      <!--<div class="indexGroomItem" onclick="goods('5')">-->
+        <!--<div class="box"><img class="img1" src="./img/name.png"/> </div>-->
+        <!--<div class="tit" id="lml">阿三家分店</div>-->
+        <!--<div class="price">￥99.00</div>-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>
+</body>
+</html>

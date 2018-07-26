@@ -1,0 +1,27 @@
+
+selfConfirm.vue
+    import selfConfirm from '@/vux/selfConfirm'
+    <self-confirm :state="confirmState" @confirm="confirm" @cancel="cancel"></self-confirm>
+    confirmState:false    //通过赋值改变(this.confirmState=true)
+    confirm(a){
+      this.confirmState=false;
+      console.log(a)
+      。。。
+    },
+    cancel(){
+      this.confirmState=false
+      。。。
+    },
+
+self.vue
+    import selfAddress from '@/vux/selfAddress'
+    <self-address :title="title" :state="addressState" @close="addressState=false" @change="getAddressVal"></self-address>
+    addressState:false      //通过赋值改变(this.addressState=true)
+    getAddressVal(a,b){
+        console.log(a);
+        console.log(b);
+    },
+
+loading
+    通过改变vuex的state.loading(true或false)控制显示和隐藏
+

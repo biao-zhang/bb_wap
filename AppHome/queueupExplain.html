@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0, user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <title>排队返现说明</title>
+  <link rel="stylesheet" href="style/reset.css">
+  <script src="js/fastclick.js" type="text/javascript"></script>
+  <script src="js/conform.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/getUrl.js"></script>
+</head>
+<style>
+  *{
+    moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+</style>
+<script type="text/javascript">
+  window.addEventListener('load', function () {
+    FastClick.attach(document.body);
+  }, false);
+</script>
+<style>
+  body{background:#fff;}
+  .explain{padding:0.2rem;}
+  .explain p img{width:100%;}
+</style>
+<body>
+   <div class="explain">
+
+   </div>
+</body>
+<script>
+  function banner(){
+    window.AndroidWebView.banner();
+  }
+  // nav
+  function goodsType(a,b) {
+    window.AndroidWebView.goodsType(a,b);
+  }
+  // marquee
+  function news(a) {
+    window.AndroidWebView.news(a);
+  }
+  //奖励说明
+  $.ajax({
+    url: LybApiUrl+"/shop/helpCenter/getHelpCenter",
+    type: "POST",
+    data:{
+      tid:7,
+      type:0
+    },
+    success:function (data) {
+      console.log(data)
+      var data = data.data
+      $('.explain').html(data.content);   //关于我们
+    }
+  })
+</script>
+</html>

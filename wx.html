@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<!--fwaefwaef11111111111111-->
+
+<!--fewafawef111111111111111111111222222222222222222222222222222222-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0, user-scalable=no" />
+    <title>Title</title>
+  <style>
+    *{
+      moz-user-select: -moz-none;
+      -moz-user-select: none;
+      -o-user-select: none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
+    html{width:100%;height:100%;margin:0;border:0;padding:0;}
+    body{width:100%;height:100%;margin:0;border:0;padding:0;font-size: 0.24rem}
+
+    ul{margin:0;border:0;padding:0;text-decoration: none;list-style: none;}
+    li{margin:0;border:0;padding:0;text-decoration: none;list-style: none;}
+    p{margin: 0;}
+    a{color:#333;text-decoration: none;}
+
+    input,textarea{border:0;padding:0;outline: 0;}
+
+    /*公告*/
+    .notice{padding-top:0.86rem;text-align:center;}
+    .notice p:first-child{font-size:0.34rem;color: #3a3a3a;line-height:0.48rem;}
+    .notice p:last-child{width:5.39rem;margin:0.3rem auto 0; font-size:0.3rem;color: #6b6b6b;line-height:0.48rem;}
+    /*底部*/
+    .footer{position: fixed; bottom:0.6rem;left:50%;transform: translate(-50%,0);}
+    .footer img{width:1.6rem;height:1.6rem;}
+    .footer p{font-size:0.24rem;line-height:0.9rem;text-align:center;color: #6b6b6b;}
+
+    #yuyinBox{position: relative;top:0;left:0;width:1.6rem;height: 1.6rem;}
+    /*transform: translate(-50%,-50%);top:50%;left: 50%;*/
+    #yuyin{position: absolute;transform: translate(-50%,-50%);top:50%;left: 50%;border-radius: 50%;width:100%;height: 100%;background: url("./yuyin.png");background-size: 100% 100%;}
+    .ani{-webkit-animation:trans 1s infinite linear}
+    @-webkit-keyframes trans {
+      0%{
+        border:1px solid #ecd0c6;
+      }
+      /*25%{*/
+        /*border:4px solid #000;*/
+      /*}*/
+      /*50%{*/
+        /*border:6px solid #000;*/
+      /*}*/
+      /*75%{*/
+        /*border:10px solid #000;*/
+      /*}*/
+      100%{
+        border:14px solid #ecd0c6;
+      }
+    }
+  </style>
+</head>
+<body>
+<!--<div class="issue">-->
+  <!--&lt;!&ndash;公告&ndash;&gt;-->
+  <!--<div class="notice">-->
+    <!--<p>不想码字，语音找服务</p>-->
+    <!--<p>您可以这样说：我想找跑腿，送一件快递到附近</p>-->
+  <!--</div>-->
+  <!--&lt;!&ndash;底部&ndash;&gt;-->
+  <!--<div class="footer">-->
+    <!--&lt;!&ndash;onmousedown="openVoice()" onmouseup="stopVoice(),trueVoice()"&ndash;&gt;-->
+    <!--<div id="yuyinBox"><div id="yuyin"></div> </div>-->
+  <!--<p>长按开始说话</p>-->
+  <!--</div>-->
+<!--</div>-->
+<!--<div onclick="chooseImg()" style="margin:50px;">openimg</div>-->
+<div onclick="openVoice()" style="margin:50px;">开始录音</div>
+<div onclick="stopVoice()" style="margin:50px;">停止录音</div>
+<div onclick="trueVoice()" style="margin:50px;">识别录音</div>
+</body>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+  (function(doc, win) {
+    var docEl = doc.documentElement,
+      resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+      recalc = function() {
+        var clientWidth = docEl.clientWidth;
+        if(!clientWidth) return;
+        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+      };
+    if(!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+  })(document, window);
+  //阻止浏览器的默认行为
+
+  function stopDefault ( e ) {
+
+//阻止默认浏览器动作(W3C )
+    if ( e && e.preventDefault )
+      console.log("aa")
+//IE 中阻止函数器默认动作的方式
+    else
+      window.event.returnValue = false;
+    return false;
+  }
+</script>
+<script>
+//  https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxcc2b239578de9aab&secret=f07d112feda88002c980ead9db1effdd
+//  {"access_token":"8_PxiHXuvokd_r1jP8FlHlAipxoKlBjS_YanGXCAY2_c42xU8KdQmJYu59w-0u-U67tglXEr3p4VJtS0JeE0cdqLQEtFCzHub4kpYns1AVgB-NNOOL_3146sXVWMRZDHmCU3MbTXFSn1CRQaV7LZVeAGAYMI","expires_in":7200}
+
+//https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi
+//{"errcode":0,"errmsg":"ok","ticket":"HoagFKDcsGMVCIY2vOjf9j0HO79hoaOqptVw3bZodIGpvLFFFI0Lz0Lz4feHKmdiTwUqqcy2Po4fsZQ7edDr1g","expires_in":7200}
+
+//   document.getElementById('yuyin').ontouchstart=function () {
+//     this.classList='ani';
+//     openVoice();
+//     return false;
+//   }
+//document.getElementById('yuyin').ontouchend=function () {
+//  this.classList='';
+//  stopVoice();
+//}
+
+  var date = parseInt((new Date().getTime())/1000);
+  console.log(date)
+  var lTicket = 'jsapi_ticket=HoagFKDcsGMVCIY2vOjf9lnzA8qKMKAwv33LM9-aB-hVY-GTGcOLgEH1K0dtS8xaQsatpPvsKX6wyOxcj0omsg&noncestr=DiezASFKolejsDmF&timestamp='+date+'&url=https://m.oxnice.com/wx.html';
+  wx.config({
+    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    appId: 'wx070f1e1cb0797cbd', // 必填，公众号的唯一标识wx200cd3b413c4e6ef
+    timestamp:date, // 必填，生成签名的时间戳
+    nonceStr: 'DiezASFKolejsDmF', // 必填，生成签名的随机串
+    signature: SHA2(lTicket),// 必填，签名，见附录1
+    jsApiList: ['chooseImage','startRecord','stopRecord','translateVoice'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+  });
+
+//  录音
+  var voiceId = '';
+  function openVoice() {
+    alert('1')
+    wx.startRecord();
+  }
+  function stopVoice() {
+    wx.stopRecord({
+      success: function (res) {
+        var localId = res.localId;
+        console.log(localId)
+        voiceId = localId;
+      }
+    });
+    setTimeout(function () {
+      wx.translateVoice({
+        localId: voiceId, // 需要识别的音频的本地Id，由录音相关接口获得
+        isShowProgressTips: 1, // 默认为1，显示进度提示
+        success: function (res) {
+        alert(res.translateResult); // 语音识别的结果
+        }
+      });
+    },1000)
+  }
+  function trueVoice() {
+    wx.translateVoice({
+      localId: voiceId, // 需要识别的音频的本地Id，由录音相关接口获得
+      isShowProgressTips: 1, // 默认为1，显示进度提示
+      success: function (res) {
+        alert(res.translateResult); // 语音识别的结果
+      }
+    });
+  }
+
+
+  // SHA1
+  function add(x, y) {
+    return((x & 0x7FFFFFFF) + (y & 0x7FFFFFFF)) ^ (x & 0x80000000) ^ (y & 0x80000000);
+  }
+
+  function SHA1hex(num) {
+    var sHEXChars = "0123456789abcdef";
+    var str = "";
+    for(var j = 7; j >= 0; j--)
+      str += sHEXChars.charAt((num >> (j * 4)) & 0x0F);
+    return str;
+  }
+
+  function AlignSHA1(sIn) {
+    var nblk = ((sIn.length + 8) >> 6) + 1,
+      blks = new Array(nblk * 16);
+    for(var i = 0; i < nblk * 16; i++) blks[i] = 0;
+    for(i = 0; i < sIn.length; i++)
+      blks[i >> 2] |= sIn.charCodeAt(i) << (24 - (i & 3) * 8);
+    blks[i >> 2] |= 0x80 << (24 - (i & 3) * 8);
+    blks[nblk * 16 - 1] = sIn.length * 8;
+    return blks;
+  }
+
+  function rol(num, cnt) {
+    return(num << cnt) | (num >>> (32 - cnt));
+  }
+
+  function ft(t, b, c, d) {
+    if(t < 20) return(b & c) | ((~b) & d);
+    if(t < 40) return b ^ c ^ d;
+    if(t < 60) return(b & c) | (b & d) | (c & d);
+    return b ^ c ^ d;
+  }
+
+  function kt(t) {
+    return(t < 20) ? 1518500249 : (t < 40) ? 1859775393 :
+      (t < 60) ? -1894007588 : -899497514;
+  }
+
+  function SHA1(sIn) {
+    var x = AlignSHA1(sIn);
+    var w = new Array(80);
+    var a = 1732584193;
+    var b = -271733879;
+    var c = -1732584194;
+    var d = 271733878;
+    var e = -1009589776;
+    for(var i = 0; i < x.length; i += 16) {
+      var olda = a;
+      var oldb = b;
+      var oldc = c;
+      var oldd = d;
+      var olde = e;
+      for(var j = 0; j < 80; j++) {
+        if(j < 16) w[j] = x[i + j];
+        else w[j] = rol(w[j - 3] ^ w[j - 8] ^ w[j - 14] ^ w[j - 16], 1);
+        t = add(add(rol(a, 5), ft(j, b, c, d)), add(add(e, w[j]), kt(j)));
+        e = d;
+        d = c;
+        c = rol(b, 30);
+        b = a;
+        a = t;
+      }
+      a = add(a, olda);
+      b = add(b, oldb);
+      c = add(c, oldc);
+      d = add(d, oldd);
+      e = add(e, olde);
+    }
+    SHA1Value = SHA1hex(a) + SHA1hex(b) + SHA1hex(c) + SHA1hex(d) + SHA1hex(e);
+    return SHA1Value.toUpperCase();
+  }
+
+  function SHA2(sIn) {
+    return SHA1(sIn).toLowerCase();
+  }
+
+</script>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <title>基本地图展示</title>
+  <link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>
+  <script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+  <script src="http://webapi.amap.com/maps?v=1.4.3&key=7ea04ee7c163aa721ee33b0f2676d015"></script>
+  <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+</head>
+<body>
+<div id="container"></div>
+
+<script>
+  var map = new AMap.Map('container', {
+    resizeEnable: true,
+    zoom:11,
+    center: [116.397428, 39.90923]
+  });
+  var marker = new AMap.Marker({
+    position: [116.480983, 39.989628],
+    map:map
+  });
+  AMap.plugin(['AMap.ToolBar','AMap.AdvancedInfoWindow'],function(){
+    //创建并添加工具条控件
+    var toolBar = new AMap.ToolBar();
+    map.addControl(toolBar);
+    //创建高级信息窗体并在指定位置打开
+    var infowindow = new AMap.AdvancedInfoWindow({
+      content: '<div class="info-title">高德地图</div><div class="info-content">'+
+      '<img src="http://webapi.amap.com/images/amap.jpg">'+
+      '高德是中国领先的数字地图内容、导航和位置服务解决方案提供商。<br>'+
+      '<a target="_blank" href="http://mobile.amap.com/">点击下载高德地图</a></div>',
+      offset: new AMap.Pixel(0, -30)
+    });
+//    infowindow.open(map,[116.480983, 39.989628]);
+  })
+</script>
+</body>
+</html>

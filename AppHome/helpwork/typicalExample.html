@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0, user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+  <title>示例</title>
+  <link rel="stylesheet" href="../style/reset.css">
+  <script src="../js/fastclick.js" type="text/javascript"></script>
+  <script src="../js/conform.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/getUrl.js"></script>
+</head>
+<style>
+  *{
+    moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  body{padding:0.24rem;box-sizing:border-box;}
+  .top{line-height:0.7rem;color:#666666;font-size:0.28rem;}
+  .tou{line-height:0.6rem;color:#333333;font-size:0.26rem;}
+  .portrait img{width:1.94rem;height:1.45rem;}
+  .info{line-height:0.96rem;color:#333333;font-size:0.26rem;}
+  .three{display:flex;justify-content:space-between;}
+  .three img{width:2.22rem;height:1.25rem;}
+  .three p{text-align:center;color:#999;font-size:0.24rem;line-height:0.4rem;}
+
+  .haha span{font-size:0.28rem;color:#666666;line-height: 0.5rem;}
+  .haha1{margin-top:0.8rem;}
+</style>
+<script type="text/javascript">
+  window.addEventListener('load', function () {
+    FastClick.attach(document.body);
+  }, false);
+</script>
+<body>
+    <div class="top">示例</div>
+    <div class="tou">头像</div>
+    <div class="portrait">
+      <img src="../img/portrait.png" alt="">
+    </div>
+    <div class="info">证件信息</div>
+
+    <div class="three">
+      <div>
+        <img src="../img/zheng.png" alt="">
+        <p>身份证正面</p>
+      </div>
+      <div>
+        <img src="../img/fan.png" alt="">
+        <p>身份证反面</p>
+      </div>
+      <div>
+        <img src="../img/shou.png" alt="">
+        <p>手持身份证</p>
+      </div>
+    </div>
+
+    <div class="haha haha1">
+      <span>1:</span>
+      <span class="one"></span>
+    </div>
+    <div class="haha">
+      <span>2:</span>
+      <span class="two"></span>
+    </div>
+</body>
+<script>
+  $.ajax({
+    url: LybApiUrl+"/service/Allinpay/bindType/supportType",
+    type: "GET",
+    data:{
+      token:123456
+    },
+    success:function (data) {
+      console.log(data)
+      $('.one').html(data.data.cardType)
+      $('.two').html(data.data.identityType)
+    }
+  })
+  function banner(){
+    window.AndroidWebView.banner();
+  }
+  // nav
+  function goodsType(a,b) {
+    window.AndroidWebView.goodsType(a,b);
+  }
+  // marquee
+  function news(a) {
+    window.AndroidWebView.news(a);
+  }
+</script>
+</html>

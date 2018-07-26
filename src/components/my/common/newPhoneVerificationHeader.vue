@@ -1,0 +1,51 @@
+<template>
+  <div class="head">
+    <x-header class="xheader" @on-click-back="titleBack" @on-click-more="title_more('title')"  @on-click-title="title_click(msg)" :left-options="{backText:'',preventGoBack:true}" :title="msg" :right-options="{showMore:false}" ref="head">
+      <a slot="right" ><router-link to="/service" class="titleRight">{{rText}}</router-link></a>
+    </x-header>
+  </div>
+</template>
+<script>
+  import {XHeader} from 'vux'
+  export default {
+    data(){
+      return{
+
+      }
+    },
+    props:{
+      msg:{
+        type:String,
+        default:'全部分类'
+      },
+      rText:{
+        type:String,
+        default:''
+      }
+    },
+    components:{XHeader},
+    mounted(){
+
+    },
+    methods:{
+      titleBack(){
+        console.log("titleBack")
+        this.$emit('titleBack');
+      },
+      title_more(more){
+        console.log("titleMore"+more)
+      },
+      title_click(cli){
+        console.log("titleClick"+cli)
+      }
+    }
+  }
+</script>
+<style scoped>
+  .head{position: fixed;top:0;z-index: 10;width:100%}
+  .xheader{width:100%;background-color: white;}
+
+  .head >>> .vux-header .vux-header-title{font-size: 0.36rem;color:#111;}
+  .head >>> .vux-header .              vux-header-left .left-arrow:before{border-color:#111;}
+  .vux-header .vux-header-right a .titleRight{font-size: 0.28rem;color:#f86e0e}
+</style>

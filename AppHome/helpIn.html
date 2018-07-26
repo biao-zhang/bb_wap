@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+	<title>帮工入驻</title>
+	<link rel="stylesheet" href="style/reset.css">
+  <script src="js/fastclick.js" type="text/javascript"></script>
+	<script src="js/conform.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/getUrl.js"></script>
+</head>
+<style>
+  *{
+    moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+</style>
+<script type="text/javascript">
+  window.addEventListener('load', function () {
+    FastClick.attach(document.body);
+  }, false);
+</script>
+<style>
+	.help_top{width:100%;height:4rem;background:#fff;margin-top:0.1rem;background:url("img/nai_logo.png") no-repeat;background-size: 100%;overflow:hidden;}
+	.help_top div{background:url("img/teamwork_btn.png") no-repeat;background-size:100%;width:4.44rem;height:0.63rem;margin:3rem auto 0;text-align:center;line-height:0.63rem;font-size: 0.3rem;color:#fff;}
+
+	.center{width: 7.1rem;margin: 0.24rem auto 0;background: #fff;padding: 0.4rem 0.4rem 1rem 0.4rem;box-sizing: border-box;box-shadow: 0 0 5px #ccc;}
+	.center p{font-size: 0.3rem;line-height: 0.48rem;letter-spacing: 0px;color: #333333;}
+</style>
+<body>
+  <div class="help_top">
+	  <div onclick="downloadHelper()">下载帮工APP</div>
+  </div>
+  <div class="center">
+	  <!--<p>为进一步了解我校学生对我校各方面的存在的态度和看法，以便更好地建设我校各项事业，现决定开展 “我为学校建言献策”活动，具体通知如下： 1． 活动对象：顺德校区全体学生；  2． 参与方式：各学院学生会组织所在学院的学生参加本次 活动，并将每一位学生对于学校各方面的意见和建议收集起来，整理统计后做成活动报告并提交至学生联合会办公室；  3． 活动截止时间为2010年11月14日 ，活动报告送交截 止时间为2010年11月19日。纸质版报告须于办公室值班时间送交，电子版报告发送至xxxxxxxxx@126.com</p>-->
+  </div>
+</body>
+<script>
+  //帮工入驻6
+  $.ajax({
+    url: LybApiUrl+"/shop/helpCenter/getHelpCenter",
+    type: "POST",
+    data:{
+      tid:6,
+      type:0
+    },
+    success:function (data) {
+      console.log(data)
+      var data = data.data
+      $('.center').html(data.content);   //关于我们
+    }
+  })
+//  var browser = {
+//    versions:function(){
+//      var u = navigator.userAgent, app = navigator.appVersion;
+//      return {//移动终端浏览器版本信息
+//        trident: u.indexOf("Trident") > -1, //IE内核
+//        presto: u.indexOf("Presto") > -1, //opera内核
+//        webKit: u.indexOf("AppleWebKit") > -1, //苹果、谷歌内核
+//        gecko: u.indexOf("Gecko") > -1 && u.indexOf("KHTML") == -1, //火狐内核
+//        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+//        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+//        android: u.indexOf("Android") > -1 || u.indexOf("Linux") > -1, //android终端或者uc浏览器
+//        iPhone: u.indexOf("iPhone") > -1 , //是否为iPhone或者QQHD浏览器
+//        iPad: u.indexOf("iPad") > -1, //是否iPad
+//        webApp: u.indexOf("Safari") == -1 //是否web应该程序，没有头部与底部
+//      };
+//    }(),
+//    language:(navigator.browserLanguage || navigator.language).toLowerCase()
+//  }
+//
+//
+//  //  下载
+//  function download(){
+//    if (browser.versions.ios == true){
+//      window.location.href = 'https://itunes.apple.com/cn/app/id1382573864'
+//    }else if(browser.versions.android == true){
+//      window.location.href = 'www.baidu.com'
+//    }
+//  }
+
+  function banner(){
+    window.AndroidWebView.banner();
+  }
+  // nav
+  function goodsType(a,b) {
+    window.AndroidWebView.goodsType(a,b);
+  }
+  // marquee
+  function news(a) {
+    window.AndroidWebView.news(a);
+  }
+  function downloadHelper() {
+    window.AndroidWebView.AppDownload();
+  }
+</script>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div onclick="chooseImg()" style="margin:50px;">openimg</div>
+<div onclick="openVoice()" style="margin:50px;">开始录音</div>
+<div onclick="stopVoice()" style="margin:50px;">停止录音</div>
+<div onclick="trueVoice()" style="margin:50px;">识别录音</div>
+</body>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+  var date = new Date().getTime();
+  var lTicket = 'jsapi_ticket=HoagFKDcsGMVCIY2vOjf9iSsdwAYkPX-Jz2zi8Fh2KCqwIt-jbfzk9KPs1FoERT_YfhZsWK43p-z0F32hKdotA&noncestr=DiezASFKolejsDmF&timestamp='+date+'&url=http://www.donghengwangluo.com/wx.html';
+//  jsapi_ticket=HoagFKDcsGMVCIY2vOjf9iSsdwAYkPX-Jz2zi8Fh2KCqwIt-jbfzk9KPs1FoERT_YfhZsWK43p-z0F32hKdotA&noncestr=Wm3WZYTPz0wzccnW&timestamp=1414587457&url=http://www.donghengwangluo.com
+  wx.config({
+    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+    appId: 'wx200cd3b413c4e6ef', // 必填，公众号的唯一标识
+    timestamp:date, // 必填，生成签名的时间戳
+    nonceStr: 'DiezASFKolejsDmF', // 必填，生成签名的随机串
+    signature: SHA2(lTicket),// 必填，签名，见附录1
+    jsApiList: ['chooseImage','startRecord','stopRecord','translateVoice'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+  });
+  function chooseImg() {
+    //  jsapi_ticket=HoagFKDcsGMVCIY2vOjf9iSsdwAYkPX-Jz2zi8Fh2KCqwIt-jbfzk9KPs1FoERT_YfhZsWK43p-z0F32hKdotA&noncestr=Wm3WZYTPz0wzccnW&timestamp=1414587457&url=http://www.donghengwangluo.com
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+        console.log(localIds)
+      }
+    });
+  }
+//  录音
+  var voiceId = '';
+  function openVoice() {
+    wx.startRecord();
+  }
+  function stopVoice() {
+    wx.stopRecord({
+      success: function (res) {
+        var localId = res.localId;
+        console.log(localId)
+        voiceId = localId;
+      }
+    });
+  }
+  function trueVoice() {
+    wx.translateVoice({
+      localId: voiceId, // 需要识别的音频的本地Id，由录音相关接口获得
+      isShowProgressTips: 1, // 默认为1，显示进度提示
+      success: function (res) {
+//        alert(res.translateResult); // 语音识别的结果
+        this.$store.state.toastText=res.translateResult
+        this.$store.state.toastType='text'
+      }
+    });
+  }
+
+
+
+
+</script>
+</html>
